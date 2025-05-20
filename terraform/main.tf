@@ -24,19 +24,15 @@ locals {
   }
 }
 
-module "aks" {
-  source              = "./modules/aks"
-  cluster_name        = "aks-${local.tags.project}"
-  dns_prefix          = "weather"
-  location            = local.location
+module "vm" {
+  source              = "./modules/vm"
   resource_group_name = local.resource_group_name
-  environment         = local.environment
+  location            = local.location
   tags                = local.tags
 
-  enable_auto_scaling = true
-  max_count           = 2
-  min_count           = 1
-  vm_size             = "Standard_B2s"
+  vm_name        = "weather-vm"
+  admin_username = var.vm_admin_user
+  ssh_public_key = file("~/.ssh/id_rsa.pub")
 }
 
 module "postgres" {
@@ -60,12 +56,4 @@ module "storage" {
   tags                 = local.tags
 
   container_name = "weather-app"
-}
-
-module "acr" {
-  source              = "./modules/acr"
-  acr_name            = "acrweatherapp"
-  location            = local.location
-  resource_group_name = local.resource_group_name
-  tags                = local.tags
 }

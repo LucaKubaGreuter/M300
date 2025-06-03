@@ -44,11 +44,11 @@ Ziel ist der Aufbau einer cloudnativen Wetter-App, das Wetterdaten sammelt, spei
 ---
 
 ### 2. Azure Infrastruktur
-- [ ] AKS Cluster + Node Pool provisionieren
-- [ ] PostgreSQL (Azure Database for PostgreSQL Flexible Server)
-- [ ] Storage Account für Backups anlegen
-- [ ] Öffentliches DNS-Name + Zertifikatsetup vorbereiten
-- [ ] Secrets über Azure Key Vault managen
+- [x] AKS Cluster + Node Pool provisionieren
+- [x] PostgreSQL (Azure Database for PostgreSQL Flexible Server)
+- [x] Storage Account für Backups anlegen
+- [x] Öffentliches DNS-Name + Zertifikatsetup vorbereiten
+- [x] Secrets über Azure Key Vault managen
 
 ---
 

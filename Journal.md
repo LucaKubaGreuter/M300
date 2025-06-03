@@ -90,3 +90,41 @@ Dadurch konnten alle nötigen Services (API, Frontend, ML, Proxy) direkt über D
 - Basics zu NGINX Reverse Proxy & FastAPI Pfad-Handling
 - Cleanes Zusammenspiel zwischen Infrastruktur, Backend und Frontend
 - Umgang mit Fehlern im Encoding und Routing
+
+---
+
+# Lernjournal 3 & 4
+
+## Thema: Integration eines ML-Moduls in die Wetter-App
+
+### Zielsetzung
+Das Ziel war es, ein Machine-Learning-Modul in die bestehende Wetter-Webanwendung zu integrieren, welches eine zusätzliche 7-Tage-Vorhersage bereitstellt. Dabei sollte das ML-Modul unabhängig als Microservice über FastAPI laufen und historische Wetterdaten nutzen.
+
+### Erreichte Meilensteine
+
+- Aufbau eines eigenständigen Docker-Containers für das ML-Modul (`ml`)
+- Implementierung eines `train.py`-Moduls zur Vorhersage der Temperatur mit echten historischen Wetterdaten über die WeatherAPI
+- Einführung einer gemeinsamen Code-Basis (`shared/weather_utils.py`) zur Wiederverwendung von API-Funktionen
+- Erstellung eines FastAPI-Endpunkts `/forecast` im `ml`-Service
+- Konfiguration des Dockerfiles und `docker-compose.yml` zur Einbindung von `shared/`
+- Erweiterung von nginx zur Weiterleitung von `/ml/forecast`-Anfragen bei vorhandenem Sicherheitsschlüssel
+- Absicherung des ML-Endpunkts durch `X-Internal-Key` Header
+- Behebung von Laufzeitfehlern durch korrekte `CMD` und Netzwerkdefinitionen
+- Troubleshooting von HTTP-Kommunikationsproblemen zwischen nginx und dem ML-Service
+
+### Herausforderungen
+
+- Die Verbindung von nginx zum ML-Service war fehleranfällig. Die Meldung „Invalid HTTP request received“ wurde durch inkorrekte Header oder unvollständige Requests verursacht.
+- Das Container-Netzwerk musste richtig konfiguriert sein, damit Dienste sich untereinander erreichen konnten.
+- Das Logging im Container war entscheidend, um zu erkennen, dass `uvicorn` korrekt läuft, die Requests aber vom Client nicht vollständig oder fehlerhaft gesendet wurden.
+
+### Nächste Schritte
+
+- Finalisierung der Kommunikation zwischen Frontend und ML-Modul, sodass die erweiterten Vorhersagen im UI angezeigt werden
+- Optional: Trainiertes Modell zwischenspeichern (statt bei jeder Anfrage zu trainieren)
+- Auswertung der Prognosequalität durch Validierung mit echten Wetterdaten
+- Styling-Anpassung des Frontends für die neue 7-Tage-Vorhersage
+
+### Reflexion
+
+Das heutige Arbeiten hat gezeigt, wie wichtig klare Modultrennung, Logging und systematische Fehleranalyse sind. Die Idee, das ML-Modul als eigenständigen Service mit API-Key-geschütztem Zugang bereitzustellen, ist robust und erweiterbar. Auch wenn es technische Stolpersteine gab, konnte durch systematisches Testen und Isolieren der Komponenten der Fehler eingegrenzt und das System stabilisiert werden.

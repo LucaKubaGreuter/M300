@@ -4,7 +4,7 @@
 
 ### Projektplanung und Struktur
 
-- Projektziel definiert: Wetter-Dashboard mit KI
+- Projektziel definiert: Wetter Dashboard mit KI
 - Entscheidung für Azure, AKS, PostgreSQL, Terraform und öffentliches HTTPS
 - Nutzung von nip.io für Domains, keine eigene Domain notwendig
 
@@ -34,7 +34,7 @@
 
 # Woche 2 - Journal
 
-## Thema: Deployment einer Container-basierten Wetter-App auf Azure VM mit HTTPS
+## Thema: Deployment einer Container basierten Wetter-App auf Azure VM mit HTTPS
 
 
 ### Was wurde heute erreicht?

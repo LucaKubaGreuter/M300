@@ -36,7 +36,6 @@
 
 ## Thema: Deployment einer Container-basierten Wetter-App auf Azure VM mit HTTPS
 
----
 
 ### Was wurde heute erreicht?
 
@@ -61,8 +60,6 @@
    - Encoding-Bug (UTF-8) in HTML erkannt und gefixt
    - Ausgabe: Wetterdaten dynamisch auf Webseite angezeigt
 
----
-
 ### Probleme & Lösungen
 
 | Problem                             | Lösung                                                               |
@@ -82,8 +79,6 @@ Ursprünglich war geplant, die App auf Azure Kubernetes Service (AKS) zu deploye
 
 Dadurch konnten alle nötigen Services (API, Frontend, ML, Proxy) direkt über Docker Compose betrieben werden.
 
----
-
 ### Was habe ich gelernt?
 
 - Wie man eine Azure-VM mit Terraform provisioniert
@@ -92,8 +87,6 @@ Dadurch konnten alle nötigen Services (API, Frontend, ML, Proxy) direkt über D
 - Basics zu NGINX Reverse Proxy & FastAPI Pfad-Handling
 - Cleanes Zusammenspiel zwischen Infrastruktur, Backend und Frontend
 - Umgang mit Fehlern im Encoding und Routing
-
----
 
 # Lernjournal 3 & 4
 

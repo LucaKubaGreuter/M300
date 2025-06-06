@@ -1,12 +1,14 @@
 # Woche 1 - Journal
 
-## 1. Projektplanung und Struktur
+## Thema: Eine Simple Infrastruktur in Terraform bauen. 
+
+### 1. Projektplanung und Struktur
 
 - Projektziel definiert: Wetter-Dashboard mit KI
 - Entscheidung für Azure, AKS, PostgreSQL, Terraform und öffentliches HTTPS
 - Nutzung von nip.io für Domains, keine eigene Domain notwendig
 
-## 2. Terraform Setup erstellt
+### 2. Terraform Setup erstellt
 
 - Lokale Terraform-Projektstruktur mit Modulen aufgebaut
 - Module implementiert für:
@@ -16,7 +18,7 @@
   - Azure Container Registry
 - Remote State mit Azure Blob Storage in der Region northeurope erfolgreich eingerichtet
 
-## 3. Fehlerbehebung und Optimierungen
+### 3. Fehlerbehebung und Optimierungen
 
 - Zugriff auf das Remote Backend korrigiert
 - Provider-Version angepasst
@@ -24,7 +26,7 @@
 - PostgreSQL korrekt mit gültigem SKU und Version konfiguriert
 - AKS-Konfiguration auf min_count = 1 angepasst für funktionierendes Autoscaling
 
-## 4. Nächste Schritte vorbereitet
+### 4. Nächste Schritte vorbereitet
 
 - Ingress mit Public IP und nip.io Domain geplant
 - cert-manager und Let's Encrypt für HTTPS bereit
@@ -36,7 +38,7 @@
 
 ---
 
-## Was wurde heute erreicht?
+### Was wurde heute erreicht?
 
 1. **Docker + NGINX Setup auf Azure VM**
    - VM mit Terraform deployed (inkl. NSG, SSH-Zugriff, Static IP)
@@ -61,7 +63,7 @@
 
 ---
 
-## Probleme & Lösungen
+### Probleme & Lösungen
 
 | Problem                             | Lösung                                                               |
 |------------------------------------|----------------------------------------------------------------------|
@@ -82,7 +84,7 @@ Dadurch konnten alle nötigen Services (API, Frontend, ML, Proxy) direkt über D
 
 ---
 
-## Was habe ich gelernt?
+### Was habe ich gelernt?
 
 - Wie man eine Azure-VM mit Terraform provisioniert
 - Docker + Docker Compose produktionsnah aufsetzt
@@ -98,10 +100,11 @@ Dadurch konnten alle nötigen Services (API, Frontend, ML, Proxy) direkt über D
 ## Thema: Integration eines ML-Moduls in die Wetter-App
 
 ### Zielsetzung
-Das Ziel war es, ein Machine-Learning-Modul in die bestehende Wetter-Webanwendung zu integrieren, welches eine zusätzliche 7-Tage-Vorhersage bereitstellt, weil der free tier der API nur eine 3 Tage Vorhersage anbietet, wird mit ML-Modul noch die restlichen Tage der Wochen predicted. Dabei sollte das ML-Modul unabhängig als Microservice über FastAPI laufen und historische Wetterdaten nutzen.
+Das Ziel war es, ein Machine-Learning-Modul in die bestehende Wetter-Webanwendung zu integrieren, welches eine zusätzliche 7-Tage-Vorhersage bereitstellt, weil der free tier der API nur eine 3 Tage Vorhersage anbietet, wird mit ML-Modul noch die restlichen Tage der Wochen predicted. Dabei sollte das ML-Modul unabhängig als Microservice über FastAPI laufen und historische Wetterdaten nutzen. Auch damit die Webseite nicht mehr über die IP-Addresse aufgerufen werden muss, wird mit DuckDNS eine Domain erstelle, im nginx.conf wird dann einfach die Addresse angepasst.
 
-### Das wurde gemacht
+### Was wurde heute erreicht?
 
+- DuckDNS Domain eingerichtet, damit die App nicht immer mit der IP aufgerufen werden muss.
 - Aufbau eines eigenständigen Docker-Containers für das ML-Modul (`ml`)
 - Implementierung eines `train.py`-Moduls zur Vorhersage der Temperatur mit echten historischen Wetterdaten über die WeatherAPI
 - Einführung einer gemeinsamen Code-Basis (`shared/weather_utils.py`) zur Wiederverwendung von API-Funktionen
@@ -124,3 +127,9 @@ Das Ziel war es, ein Machine-Learning-Modul in die bestehende Wetter-Webanwendun
 - Optional: Trainiertes Modell zwischenspeichern (statt bei jeder Anfrage zu trainieren)
 - Auswertung der Prognosequalität durch Validierung mit echten Wetterdaten
 - Styling-Anpassung des Frontends für die neue 7-Tage-Vorhersage
+
+### Was habe ich gelernt
+
+- Ein Simples ML-Modul in python schreiben (grössten Teils einfahc importierter python libraries)
+- Absiecherung der Website Endpunkte mitels `X-Internal-Key`
+- Troubelshooting von Kommunikationsproblemen zwischen Docker Containern

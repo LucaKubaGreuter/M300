@@ -93,7 +93,7 @@ Dadurch konnten alle nötigen Services (API, Frontend, ML, Proxy) direkt über D
 ## Thema: Integration eines ML-Moduls in die Wetter-App
 
 ### Zielsetzung
-Das Ziel war es, ein Machine Learning Modul in die bestehende Wetter-App zu integrieren, welches eine zusätzliche 7 Tage Vorhersage bereitstellt, weil der free tier der API nur eine 3 Tage Vorhersage anbietet, wird mit ML-Modul noch die restlichen Tage der Wochen predicted. Dabei sollte das ML-Modul unabhängig als Microservice über FastAPI laufen und historische Wetterdaten nutzen. Auch damit die Webseite nicht mehr über die IP Addresse aufgerufen werden muss, wird mit DuckDNS eine Domain erstelle, im nginx.conf wird dann einfach die Addresse angepasst.
+Das Ziel war es, ein Machine Learning Modul in die bestehende Wetter-App zu integrieren, welches eine zusätzliche 7 Tage Vorhersage bereitstellt, weil der free tier der API nur eine 3 Tage Vorhersage anbietet, wird mit ML-Modul noch die restlichen Tage der Wochen predicted. Dabei sollte das ML-Modul unabhängig als Microservice über FastAPI laufen und historische Wetterdaten nutzen. Auch damit die Webseite nicht mehr über die IP Addresse aufgerufen werden muss, wird mit DuckDNS eine Domain erstellt, im nginx.conf wird dann einfach die Addresse angepasst.
 
 ### Was wurde heute erreicht?
 

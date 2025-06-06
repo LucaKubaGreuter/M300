@@ -2,13 +2,13 @@
 
 ## Thema: Eine Simple Infrastruktur in Terraform bauen. 
 
-### 1. Projektplanung und Struktur
+### Projektplanung und Struktur
 
 - Projektziel definiert: Wetter-Dashboard mit KI
 - Entscheidung für Azure, AKS, PostgreSQL, Terraform und öffentliches HTTPS
 - Nutzung von nip.io für Domains, keine eigene Domain notwendig
 
-### 2. Terraform Setup erstellt
+### Terraform Setup erstellt
 
 - Lokale Terraform-Projektstruktur mit Modulen aufgebaut
 - Module implementiert für:
@@ -18,7 +18,7 @@
   - Azure Container Registry
 - Remote State mit Azure Blob Storage in der Region northeurope erfolgreich eingerichtet
 
-### 3. Fehlerbehebung und Optimierungen
+### Fehlerbehebung und Optimierungen
 
 - Zugriff auf das Remote Backend korrigiert
 - Provider-Version angepasst
@@ -26,7 +26,7 @@
 - PostgreSQL korrekt mit gültigem SKU und Version konfiguriert
 - AKS-Konfiguration auf min_count = 1 angepasst für funktionierendes Autoscaling
 
-### 4. Nächste Schritte vorbereitet
+### Nächste Schritte vorbereitet
 
 - Ingress mit Public IP und nip.io Domain geplant
 - cert-manager und Let's Encrypt für HTTPS bereit
@@ -39,22 +39,22 @@
 
 ### Was wurde heute erreicht?
 
-1. **Docker + NGINX Setup auf Azure VM**
+- **Docker + NGINX Setup auf Azure VM**
    - VM mit Terraform deployed (inkl. NSG, SSH-Zugriff, Static IP)
    - Docker + Docker Compose erfolgreich installiert und getestet (mit `hello-world`)
    - Containerisierte App (Frontend, API, ML-Service, Proxy) lokal auf VM deployed
 
-2. **Nginx-Reverse-Proxy**
+- **Nginx-Reverse-Proxy**
    - Eigener NGINX-Container für HTTP-Routing auf Port 80
    - Proxy-Routing konfiguriert für `/`, `/api/` und `/ml/` zu den entsprechenden Services
 
-3. **HTTPS mit Let's Encrypt (Certbot)**
+- **HTTPS mit Let's Encrypt (Certbot)**
    - NIP.IO-Domain (`13.74.162.14.nip.io`) verwendet
    - Zertifikat erfolgreich mit Certbot (Webroot-Modus) generiert
    - HTTPS-Serverblock in nginx eingerichtet
    - HTTP auf HTTPS Weiterleitung per `return 301` eingerichtet
 
-4. **Frontend mit API verbunden**
+- **Frontend mit API verbunden**
    - API liefert Wetter-Dummy-Daten via `/api/weather`
    - Frontend ruft API über `fetch()` auf
    - Encoding-Bug (UTF-8) in HTML erkannt und gefixt

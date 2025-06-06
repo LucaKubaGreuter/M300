@@ -98,9 +98,9 @@ Dadurch konnten alle nötigen Services (API, Frontend, ML, Proxy) direkt über D
 ## Thema: Integration eines ML-Moduls in die Wetter-App
 
 ### Zielsetzung
-Das Ziel war es, ein Machine-Learning-Modul in die bestehende Wetter-Webanwendung zu integrieren, welches eine zusätzliche 7-Tage-Vorhersage bereitstellt. Dabei sollte das ML-Modul unabhängig als Microservice über FastAPI laufen und historische Wetterdaten nutzen.
+Das Ziel war es, ein Machine-Learning-Modul in die bestehende Wetter-Webanwendung zu integrieren, welches eine zusätzliche 7-Tage-Vorhersage bereitstellt, weil der free tier der API nur eine 3 Tage Vorhersage anbietet, wird mit ML-Modul noch die restlichen Tage der Wochen predicted. Dabei sollte das ML-Modul unabhängig als Microservice über FastAPI laufen und historische Wetterdaten nutzen.
 
-### Erreichte Meilensteine
+### Das wurde gemacht
 
 - Aufbau eines eigenständigen Docker-Containers für das ML-Modul (`ml`)
 - Implementierung eines `train.py`-Moduls zur Vorhersage der Temperatur mit echten historischen Wetterdaten über die WeatherAPI
@@ -124,7 +124,3 @@ Das Ziel war es, ein Machine-Learning-Modul in die bestehende Wetter-Webanwendun
 - Optional: Trainiertes Modell zwischenspeichern (statt bei jeder Anfrage zu trainieren)
 - Auswertung der Prognosequalität durch Validierung mit echten Wetterdaten
 - Styling-Anpassung des Frontends für die neue 7-Tage-Vorhersage
-
-### Reflexion
-
-Das heutige Arbeiten hat gezeigt, wie wichtig klare Modultrennung, Logging und systematische Fehleranalyse sind. Die Idee, das ML-Modul als eigenständigen Service mit API-Key-geschütztem Zugang bereitzustellen, ist robust und erweiterbar. Auch wenn es technische Stolpersteine gab, konnte durch systematisches Testen und Isolieren der Komponenten der Fehler eingegrenzt und das System stabilisiert werden.

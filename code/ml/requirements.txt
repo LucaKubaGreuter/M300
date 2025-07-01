@@ -1,0 +1,8 @@
+# weather-app/ml/requirements.txt
+fastapi
+uvicorn
+requests
+pandas
+scikit-learn
+numpy
+prometheus-fastapi-instrumentator

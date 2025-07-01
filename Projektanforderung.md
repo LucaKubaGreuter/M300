@@ -14,7 +14,6 @@ Ziel ist der Aufbau einer cloudnativen Wetter-App, das Wetterdaten sammelt, spei
     - [4. Containerisierung \& Kubernetes](#4-containerisierung--kubernetes)
     - [5. Datenbank \& Backup](#5-datenbank--backup)
     - [6. Monitoring \& Logging](#6-monitoring--logging)
-    - [7. CI/CD Pipeline](#7-cicd-pipeline)
     - [8. Dokumentation](#8-dokumentation)
   - [Mögliche Erweiterungen](#mögliche-erweiterungen)
 ---
@@ -53,57 +52,48 @@ Ziel ist der Aufbau einer cloudnativen Wetter-App, das Wetterdaten sammelt, spei
 ---
 
 ### 3. Applikation lokal bauen
-- [ ] Backend API
-- [ ] REST-Endpunkte für:
-  - [ ] Wetterdaten speichern
-  - [ ] Wetterdaten abrufen
-  - [ ] ML-Vorhersage aufrufen
-- [ ] ML-Modell:
-  - [ ] Daten beschaffen
-  - [ ] Trainieren & exportieren
-  - [ ] Modellserver als eigenständiger Container
-- [ ] Frontend:
-  - [ ] UI für aktuelle Daten & Vorhersage
-  - [ ] Charts
+- [x] Backend API
+- [x] REST-Endpunkte für:
+  - [x] Wetterdaten speichern
+  - [x] Wetterdaten abrufen
+  - [x] ML-Vorhersage aufrufen
+- [x] ML-Modell:
+  - [x] Daten beschaffen
+  - [x] Trainieren & exportieren
+  - [x] Modellserver als eigenständiger Container
+- [x] Frontend:
+  - [x] UI für aktuelle Daten & Vorhersage
+  - [x] Charts
 
 ---
 
 ### 4. Containerisierung & Kubernetes
-- [ ] Dockerfiles für Backend, Frontend, ML-Modell
-- [ ] Kubernetes Manifeste
-- [ ] Ingress Controller + HTTPS via Cert-Manager
-- [ ] DNS-Record + Zertifikatsvalidierung
+- [x] Dockerfiles für Backend, Frontend, ML-Modell
+- [x] Kubernetes Manifeste
+- [x] Ingress Controller + HTTPS via Cert-Manager
+- [x] DNS-Record + Zertifikatsvalidierung
 
 ---
 
 ### 5. Datenbank & Backup
-- [ ] Verbindung zu PostgreSQL sichern 
-- [ ] Schema-Definition
-- [ ] Regelmässige Backups einrichten
+- [x] Verbindung zu PostgreSQL sichern 
+- [x] Schema-Definition
+- [x] Regelmässige Backups einrichten
 
 ---
 
 ### 6. Monitoring & Logging
-- [ ] Prometheus + Grafana Dashboard
-- [ ] Logging mit Fluent Bit + Loki
-- [ ] Alerts einrichten 
-
----
-
-### 7. CI/CD Pipeline 
-- [ ] Workflow für Build + Push der Images
-- [ ] Workflow für Kubernetes Deployment
-- [ ] Optional: Terraform Automation
+- [x] Prometheus + Grafana Dashboard
 
 ---
 
 ### 8. Dokumentation
-- [ ] Infrastruktur-Doku
-- [ ] Code-Doku 
-- [ ] ML-Modell Training + Performance
-- [ ] Sicherheitsüberblick 
-- [ ] Backup-Strategie
-- [ ] Projektfazit + mögliche Erweiterungen
+- [x] Infrastruktur-Doku
+- [x] Code-Doku 
+- [x] ML-Modell Training + Performance
+- [x] Sicherheitsüberblick 
+- [x] Backup-Strategie
+- [x] Projektfazit + mögliche Erweiterungen
 
 ---
 

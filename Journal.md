@@ -123,6 +123,144 @@ Das Ziel war es, ein Machine Learning Modul in die bestehende Wetter-App zu inte
 
 ### Was habe ich gelernt
 
-- Ein Simples ML-Modul in python schreiben (grössten Teils einfach importierte python libraries)
-- Absiecherung der Website Endpunkte mitels `X-Internal-Key`
-- Troubelshooting von Kommunikationsproblemen zwischen Docker Containern
+Das heutige Arbeiten hat gezeigt, wie wichtig klare Modultrennung, Logging und systematische Fehleranalyse sind. Die Idee, das ML-Modul als eigenständigen Service mit API-Key-geschütztem Zugang bereitzustellen, ist robust und erweiterbar. Auch wenn es technische Stolpersteine gab, konnte durch systematisches Testen und Isolieren der Komponenten der Fehler eingegrenzt und das System stabilisiert werden.
+
+# Woche 5 - Monitoring, Backups und Betriebsfähigkeit
+
+## 1. Monitoring mit Prometheus & Grafana
+
+- Ziel: Betriebsmetriken der VM sowie der Container live überwachen
+- Entscheidung für Prometheus + Node Exporter (Systemmetriken) und Grafana (Dashboarding)
+- Prometheus & Grafana über Docker Compose als Services deployt
+- Prometheus scrape-config für node_exporter (auf Port 9100) erstellt
+- Node Exporter Container im Compose-Netzwerk bereitgestellt
+- Grafana initial über Port 3000, später sicher via nginx/HTTPS unter `/grafana/` erreichbar gemacht
+- Grafana-Umgebungsvariable `GF_SERVER_ROOT_URL` für Subpath-Betrieb gesetzt
+- Node Exporter Dashboard (ID: 1860) in Grafana importiert und konfiguriert
+
+### Herausforderungen & Lösungen
+
+| Problem                      | Lösung                                                               |
+|------------------------------|----------------------------------------------------------------------|
+| Node Exporter via `network_mode: host` führte zu Problemen | Standard Compose-Netz genutzt, Port explizit gemappt               |
+| 502 Bad Gateway beim Zugriff auf Grafana      | nginx location-Block, Rewrite-Rule und richtige Container-URL gesetzt  |
+| Prometheus konnte node_exporter nicht erreichen | Korrekte Compose-Service-Names und Ports in `prometheus.yml` genutzt |
+| Zugriff aus Internet         | NSG-Regel in Terraform für Port 3000 gesetzt, später HTTPS-Proxy via nginx |
+
+---
+
+## 2. Backups der App-Struktur
+
+- Fokus auf Container- und App-Daten (kein DB-Backup, da Datenquelle extern)
+- Bash-Script zum Packen der gesamten App (`tar.gz` von `/weather-app/`)
+- Upload ins Azure Storage (Container `backup`) mittels `azcopy`
+- SAS-Token sicher aus Datei (`SAS_key.txt`) gelesen statt im Script
+- Wöchentlicher Cronjob (`crontab -e`) zur Automatisierung:  
+  `0 4 * * 2 /home/azureuser/weather-app/backup.sh >> /home/azureuser/weather-app/backup.log 2>&1`
+- Backup-Prozess getestet: Upload & Berechtigungskonflikte erfolgreich gelöst
+
+---
+
+## 3. Troubleshooting & Lessons Learned
+
+- Networking und DNS-Namen im Docker Compose entscheiden über Erfolg des Setups
+- **azcopy** ist deutlich schlanker & automationsfreundlicher als Azure CLI für Backups
+- Nie Credentials oder SAS-Keys im Klartext oder Git speichern – stattdessen Datei oder Secret-Mount
+- Monitoring mit Grafana bringt sehr schnelle Sichtbarkeit von Ressourcenengpässen und hilft beim Troubleshooting
+
+---
+
+## 4. Nächste Schritte
+
+- **Logging**-Stack mit Fluent Bit und Loki aufsetzen
+- **Alerting** in Grafana für kritische Metriken (z.B. CPU-Auslastung, Festplattenplatz, Nicht-Erreichbarkeit der API)
+- Dokumentation und Start-up Script für vollautomatisches Restore der App auf neue VM mit Terraform-Pipeline entwerfen
+- Optional: Monitoring/Logging für API-Calls und ML-Vorhersagen ergänzen (Prometheus Middleware in FastAPI)
+
+---
+
+## Reflexion
+
+- Die Abkehr von klassischem Datenbank-Backup und stattdessen ein Infrastruktur- und App-Dump ist für stateless Apps mit externen APIs schlank, günstig und praktisch.
+- Monitoring mit Open-Source-Tools im eigenen Stack zu betreiben ist eine realistische Cloud-Native-Practice und gibt volle Kontrolle über Daten und Alerts.
+- Infrastruktur als Code (Terraform) ermöglicht das Setup und Restore auf Knopfdruck – wichtig für Wartbarkeit und Kostenkontrolle in der Cloud.
+
+---
+
+# Woche 6/7 – Betrieb und Abschluss
+
+## 1. Gesamtüberblick & Automatisierung
+
+- **Alle zentralen Betriebsaufgaben automatisiert:**  
+  - Infrastruktur (Terraform)
+  - App-Deployment (Docker Compose)
+  - HTTPS + Domain Routing (nginx, DuckDNS)
+  - Monitoring (Prometheus/Grafana)
+  - Backups (azcopy + cron)
+- **Alles ist dokumentiert** und reproduzierbar, inkl. Troubleshooting-Erkenntnisse
+
+## 2. Projekt-Highlights
+
+- Stateless Architektur: App kann auf neuer VM in Minuten wiederhergestellt werden
+- Überwachung und Logging (inkl. Visualisierung per Dashboard) sind dauerhaft aktiv
+- Infrastruktur-Kosten optimiert: PostgreSQL deaktiviert, Storage Accounts minimal genutzt
+- Backup/Restore-Pfade vorbereitet für vollautomatisierte Disaster Recovery
+
+---
+
+## 2. Datenpersistenz & Betriebssicherheit
+
+* **Persistente Volumes** in `docker-compose.yaml` für Prometheus (`prometheus-data`) und Grafana (`grafana-data`) hinzugefügt.
+* Nach Docker-Restarts bleiben Dashboards, Prometheus-Daten und User-Einstellungen erhalten.
+* Grafana-Konfiguration (`GF_SERVER_ROOT_URL`) für Subpath-Betrieb im Reverse Proxy angepasst.
+
+## 3. Troubleshooting & Lessons Learned
+
+* Fehlerursachen beim Monitoring identifiziert:
+
+  * Docker Compose Netzwerke und Service-Namen sind kritisch für funktionierende Kommunikation!
+  * Internal DNS (`host.docker.internal`) funktioniert nicht wie lokal, sondern nur Service-Name (`api`, `ml` usw.) im Compose-Netz.
+  * Probleme mit Speicher- und Ressourcenknappheit der VM führten zu Ausfällen – Lösung: VM-SKU über Terraform hochgestuft.
+  * Prometheus Targets und Ports immer wieder angepasst, bis alle Services dauerhaft „UP“ sind.
+
+## 4. Verbesserte Benutzerfreundlichkeit: Cookies & Frontend-Styling
+
+* **Cookies** im Frontend (JS): Die zuletzt gewählte Stadt wird im Browser gespeichert und bei erneutem Laden automatisch vorgeschlagen.
+
+  * Eigene Cookie-Helper in `script.js` implementiert (`setCookie`, `getCookie`).
+  * Funktion per DevTools getestet und validiert (Cookies werden gesetzt/gelesen).
+* **Frontend Styling**: Das Wetter-Frontend deutlich verschönert:
+
+  * CSS so gestaltet, dass alle Ausgaben in modernem Card-Design erscheinen.
+  * ML-Prognosen und Wetterdaten im gleichen Stil und mit konsistenter Typografie ausgegeben.
+  * Flexibles Layout (zentriert, mobilfreundlich, klare Typografie, Platzhalter für Icons/Bilder vorbereitet).
+  * Feedback von Testpersonen zur UI aufgenommen und umgesetzt.
+* Fehler bei der Anwendung des Styles nach Rebuilds erkannt und gelöst (Container neu gebaut, Browser Cache geleert, Hard Reload durchgeführt).
+
+---
+
+## 5. Aktueller Stand
+
+* **Die App ist voll funktionsfähig**:
+
+  * Monitoring (Prometheus, Grafana) läuft persistent
+  * Dashboards & Daten gehen bei Container-Restarts nicht verloren
+  * Nutzer können die Stadt im Frontend wählen, der Wert bleibt dank Cookies gespeichert
+  * Das Frontend sieht modern und übersichtlich aus, Styling ist konsistent und vorbereitet für weitere Visuals (z.B. Wetter-Icons)
+  * App ist resilient gegen VM-Restarts, da alles dokumentiert und als Code/Config vorhanden ist
+
+---
+
+## Reflexion
+
+* Monitoring, Logging und UI-Polishing sind keine „Nebensache“, sondern entscheidend für einen robusten Betrieb
+* Ohne Docker-Volumes und richtige Netzwerk-Namen funktioniert nichts dauerhaft – Infrastruktur als Code zahlt sich aus!
+* Feedback-Schleifen (Fehleranalyse im Betrieb, User-Tests im Frontend) sind für die Stabilität und Akzeptanz mindestens so wichtig wie die technische Umsetzung
+
+---
+
+## Fazit
+
+- Cloud- und Container-Technologien ermöglichen hochverfügbare, günstige und portable Web-Projekte, auch ohne großen Aufwand für klassische DB-Backups
+- Die systematische Dokumentation, Tests und Automatisierung sorgen für maximale Resilienz
+- Monitoring und regelmäßige Backups sind unverzichtbar für den Betrieb produktiver Systeme

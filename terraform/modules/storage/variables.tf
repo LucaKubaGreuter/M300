@@ -26,8 +26,8 @@ variable "tags" {
     environment = "dev"
   }
 }
-variable "container_name" {
+variable "container_names" {
   description = "The name of the blob container."
-  type        = string
-  default     = "weather-app"
+  type        = list(string)
+  default     = ["weather-app", "backup"]
 }

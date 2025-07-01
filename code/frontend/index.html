@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App Schweiz</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://stweatherapp.z16.web.core.windows.net/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="main-container">
+    <header class="app-header">
+      <h1>Weather App Schweiz</h1>
+      <div class="search-bar">
+        <input id="city-input" placeholder="Zürich" />
+        <button onclick="loadWeather()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span>Suche</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <div id="weather" class="weather-container"></div>
+      
+      <section class="forecast-section">
+        <h3 class="section-title">Vorhersage</h3>
+        <ul id="forecast" class="forecast-list"></ul>
+      </section>
+
+      <section class="forecast-section ml-forecast">
+        <h3 class="section-title">Grosszügige Vorhersage (nicht sehr genau)</h3>
+        <ul id="ml-forecast" class="forecast-list"></ul>
+      </section>
+    </main>
+  </div>
+  <script src="/script.js"></script>
+</body>
+</html>

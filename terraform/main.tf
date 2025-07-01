@@ -35,18 +35,6 @@ module "vm" {
   ssh_public_key = file("~/.ssh/id_rsa.pub")
 }
 
-module "postgres" {
-  source              = "./modules/postgresql"
-  db_name             = "postgres-${local.tags.project}"
-  resource_group_name = local.resource_group_name
-  location            = local.location
-  environment         = local.environment
-  tags                = local.tags
-
-  admin_username = var.db_user
-  admin_password = var.db_pass
-}
-
 module "storage" {
   source               = "./modules/storage"
   storage_account_name = "stweatherapp"
@@ -55,5 +43,5 @@ module "storage" {
   environment          = local.environment
   tags                 = local.tags
 
-  container_name = "weather-app"
+  container_names = ["weather-app", "backup"]
 }

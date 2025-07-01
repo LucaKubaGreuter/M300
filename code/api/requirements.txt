@@ -1,0 +1,7 @@
+# weather-app/api/requirements.txt
+fastapi
+uvicorn
+requests
+deep-translator
+pytz
+prometheus-fastapi-instrumentator

@@ -1,6 +1,9 @@
 # Local .terraform directories
 terraform/.terraform/
 
+# SAS key
+terraform/SAS_key.txt
+
 # .tfstate files
 terraform/*.tfstate
 terraform/*.tfstate.*

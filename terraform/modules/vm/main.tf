@@ -37,12 +37,12 @@ resource "azurerm_public_ip" "public_ip" {
 }
 
 resource "azurerm_linux_virtual_machine" "vm" {
-  name                = var.vm_name
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  size                = "Standard_B1s"
-  admin_username      = var.admin_username
-  network_interface_ids = [azurerm_network_interface.nic.id]
+  name                            = var.vm_name
+  resource_group_name             = var.resource_group_name
+  location                        = var.location
+  size                            = "Standard_B2s"
+  admin_username                  = var.admin_username
+  network_interface_ids           = [azurerm_network_interface.nic.id]
   disable_password_authentication = true
 
   os_disk {
@@ -102,6 +102,30 @@ resource "azurerm_network_security_group" "nsg" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "443"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "AllowGrafana"
+    priority                   = 3000
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3000"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "AllowPrometheus"
+    priority                   = 3001
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "9090"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }

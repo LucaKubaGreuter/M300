@@ -50,6 +50,9 @@
 - Entscheidung für Azure, AKS, PostgreSQL, Terraform und öffentliches HTTPS
 - Nutzung von nip.io für Domains, keine eigene Domain notwendig
 
+### Architektur-Diagramm Vorstellung 
+[Architektur-Diagramm](Architekturdiagramm.drawio)
+
 ### Terraform Setup erstellt
 
 - Lokale Terraform Projektstruktur mit Modulen aufgebaut
@@ -102,6 +105,9 @@
    - Encoding Bug (UTF-8) in HTML erkannt und gefixt
    - Ausgabe: Wetterdaten dynamisch auf Webseite angezeigt
 
+### Aktuelles Diagramm
+![Aktuelles Architektur-Diagramm](pictures/rg-lucgr-Ende.png)
+
 ### Probleme & Lösungen
 
 | Problem                             | Lösung                                                               |
@@ -130,7 +136,7 @@ Dadurch konnten alle nötigen Services (API, Frontend, ML, Proxy) direkt über D
 - Cleanes Zusammenspiel zwischen Infrastruktur, Backend und Frontend
 - Umgang mit Fehlern im Encoding und Routing
 
-# Lernjournal 3 & 4
+# Lernjournal 3 + 4
 
 ## Thema: Integration eines ML-Moduls in die Wetter-App
 
@@ -198,7 +204,7 @@ Das heutige Arbeiten hat gezeigt, wie wichtig klare Modultrennung, Logging und s
 - Upload ins Azure Storage (Container `backup`) mittels `azcopy`
 - SAS-Token sicher aus Datei (`SAS_key.txt`) gelesen statt im Script
 - Wöchentlicher Cronjob (`crontab -e`) zur Automatisierung:  
-  `0 4 * * 2 /home/azureuser/weather-app/backup.sh >> /home/azureuser/weather-app/backup.log 2>&1`
+`0 3 * * 2 /home/azureuser -c "/backup.sh"`
 - Backup-Prozess getestet: Upload & Berechtigungskonflikte erfolgreich gelöst
 
 ---
@@ -229,7 +235,7 @@ Das heutige Arbeiten hat gezeigt, wie wichtig klare Modultrennung, Logging und s
 
 ---
 
-# Woche 6/7 – Betrieb und Abschluss
+# Woche 6 + 7 – Betrieb und Abschluss
 
 ## 1. Gesamtüberblick & Automatisierung
 

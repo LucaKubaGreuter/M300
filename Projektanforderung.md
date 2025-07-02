@@ -14,8 +14,7 @@ Ziel ist der Aufbau einer cloudnativen Wetter-App, das Wetterdaten sammelt, spei
     - [4. Containerisierung \& Kubernetes](#4-containerisierung--kubernetes)
     - [5. Datenbank \& Backup](#5-datenbank--backup)
     - [6. Monitoring \& Logging](#6-monitoring--logging)
-    - [8. Dokumentation](#8-dokumentation)
-  - [Mögliche Erweiterungen](#mögliche-erweiterungen)
+    - [7. Dokumentation](#8-dokumentation)
 ---
 
 ## Projektanforderungen

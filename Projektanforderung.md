@@ -87,18 +87,7 @@ Ziel ist der Aufbau einer cloudnativen Wetter-App, das Wetterdaten sammelt, spei
 
 ---
 
-### 8. Dokumentation
+### 7. Dokumentation
 - [x] Infrastruktur-Doku
-- [x] Code-Doku 
-- [x] ML-Modell Training + Performance
-- [x] Sicherheitsüberblick 
-- [x] Backup-Strategie
+- [x] Code-Doku  
 - [x] Projektfazit + mögliche Erweiterungen
-
----
-
-## Mögliche Erweiterungen
-- Authentifizierung 
-- Mehrere Städte speichern & vergleichen
-- Komplexeres ML-Modell 
-- Dark-Mode im Frontend

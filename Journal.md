@@ -34,4 +34,3 @@
 - Verbesserte Benutzerfreundlichkeit  
 - Aktueller Stand  
 - Reflexion  
-- Fazit

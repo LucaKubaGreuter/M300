@@ -3,6 +3,6 @@ TBZ Modul M300
 
 [Projektanforderungen](Projektanforderung.md)
 <br>
-[Dokumentation](Documentation.md)
+[Dokumentation](Projektdoku.md)
 
 https://weatherappm300.duckdns.org/

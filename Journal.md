@@ -1,5 +1,3 @@
-# Inhaltsverzeichnis
-
 ## Woche 1 - Eine Simple Infrastruktur in Terraform bauen
 - Projektplanung und Struktur  
 - Terraform Setup erstellt  

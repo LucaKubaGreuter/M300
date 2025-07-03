@@ -1,3 +1,47 @@
+# Inhaltsverzeichnis
+
+## Woche 1 - Eine Simple Infrastruktur in Terraform bauen
+- Projektplanung und Struktur  
+- Terraform Setup erstellt  
+- Fehlerbehebung und Optimierungen  
+- Nächste Schritte vorbereitet  
+
+## Woche 2 - Deployment einer Container basierten Wetter-App auf Azure VM mit HTTPS
+- Docker + NGINX Setup auf Azure VM  
+- Nginx-Reverse-Proxy Konfiguration  
+- HTTPS mit Let's Encrypt (Certbot)  
+- Frontend mit API verbunden  
+- Probleme & Lösungen  
+- Warum kein AKS?  
+- Was habe ich gelernt?  
+
+## Woche 3 + 4 - Integration eines ML-Moduls in die Wetter-App
+- Zielsetzung  
+- Implementierungsschritte  
+- Herausforderungen  
+- Nächste Schritte  
+- Lessons Learned  
+
+## Woche 5 - Monitoring, Backups und Betriebsfähigkeit
+- Monitoring mit Prometheus & Grafana  
+- Backups der App-Struktur  
+- Troubleshooting & Lessons Learned  
+- Nächste Schritte  
+- Reflexion  
+
+## Woche 6 + 7 – Betrieb und Abschluss
+- Gesamtüberblick & Automatisierung  
+- Projekt-Highlights  
+- Datenpersistenz & Betriebssicherheit  
+- Verbesserte Benutzerfreundlichkeit  
+- Aktueller Stand  
+- Reflexion  
+- Fazit  
+
+---
+
+# Woche 1 - Journal
+
 ## Thema: Eine Simple Infrastruktur in Terraform bauen. 
 
 ### Projektplanung und Struktur
@@ -32,6 +76,8 @@
 - Ingress mit Public IP und nip.io Domain geplant
 - cert-manager und Let's Encrypt für HTTPS bereit
 - App Deployments, Ingress und CI/CD sind als nächste Schritte vorgesehen
+
+# Woche 2 - Journal
 
 ## Thema: Deployment einer Container basierten Wetter-App auf Azure VM mit HTTPS
 
@@ -90,6 +136,8 @@ Dadurch konnten alle nötigen Services (API, Frontend, ML, Proxy) direkt über D
 - Cleanes Zusammenspiel zwischen Infrastruktur, Backend und Frontend
 - Umgang mit Fehlern im Encoding und Routing
 
+# Lernjournal 3 + 4
+
 ## Thema: Integration eines ML-Moduls in die Wetter-App
 
 ### Zielsetzung
@@ -124,6 +172,8 @@ Das Ziel war es, ein Machine Learning Modul in die bestehende Wetter-App zu inte
 ### Was habe ich gelernt
 
 Das heutige Arbeiten hat gezeigt, wie wichtig klare Modultrennung, Logging und systematische Fehleranalyse sind. Die Idee, das ML-Modul als eigenständigen Service mit API-Key-geschütztem Zugang bereitzustellen, ist robust und erweiterbar. Auch wenn es technische Stolpersteine gab, konnte durch systematisches Testen und Isolieren der Komponenten der Fehler eingegrenzt und das System stabilisiert werden.
+
+# Woche 5 - Monitoring, Backups und Betriebsfähigkeit
 
 ## 1. Monitoring mit Prometheus & Grafana
 
@@ -184,6 +234,8 @@ Das heutige Arbeiten hat gezeigt, wie wichtig klare Modultrennung, Logging und s
 - Infrastruktur als Code (Terraform) ermöglicht das Setup und Restore auf Knopfdruck – wichtig für Wartbarkeit und Kostenkontrolle in der Cloud.
 
 ---
+
+# Woche 6 + 7 – Betrieb und Abschluss
 
 ## 1. Gesamtüberblick & Automatisierung
 
@@ -254,5 +306,3 @@ Das heutige Arbeiten hat gezeigt, wie wichtig klare Modultrennung, Logging und s
 * Monitoring, Logging und UI-Polishing sind keine „Nebensache“, sondern entscheidend für einen robusten Betrieb
 * Ohne Docker-Volumes und richtige Netzwerk-Namen funktioniert nichts dauerhaft – Infrastruktur als Code zahlt sich aus!
 * Feedback-Schleifen (Fehleranalyse im Betrieb, User-Tests im Frontend) sind für die Stabilität und Akzeptanz mindestens so wichtig wie die technische Umsetzung
-
----

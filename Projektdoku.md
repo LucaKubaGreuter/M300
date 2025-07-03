@@ -1,5 +1,3 @@
-# Woche 1 - Journal
-
 ## Thema: Eine Simple Infrastruktur in Terraform bauen. 
 
 ### Projektplanung und Struktur
@@ -34,8 +32,6 @@
 - Ingress mit Public IP und nip.io Domain geplant
 - cert-manager und Let's Encrypt für HTTPS bereit
 - App Deployments, Ingress und CI/CD sind als nächste Schritte vorgesehen
-
-# Woche 2 - Journal
 
 ## Thema: Deployment einer Container basierten Wetter-App auf Azure VM mit HTTPS
 
@@ -94,8 +90,6 @@ Dadurch konnten alle nötigen Services (API, Frontend, ML, Proxy) direkt über D
 - Cleanes Zusammenspiel zwischen Infrastruktur, Backend und Frontend
 - Umgang mit Fehlern im Encoding und Routing
 
-# Lernjournal 3 + 4
-
 ## Thema: Integration eines ML-Moduls in die Wetter-App
 
 ### Zielsetzung
@@ -130,8 +124,6 @@ Das Ziel war es, ein Machine Learning Modul in die bestehende Wetter-App zu inte
 ### Was habe ich gelernt
 
 Das heutige Arbeiten hat gezeigt, wie wichtig klare Modultrennung, Logging und systematische Fehleranalyse sind. Die Idee, das ML-Modul als eigenständigen Service mit API-Key-geschütztem Zugang bereitzustellen, ist robust und erweiterbar. Auch wenn es technische Stolpersteine gab, konnte durch systematisches Testen und Isolieren der Komponenten der Fehler eingegrenzt und das System stabilisiert werden.
-
-# Woche 5 - Monitoring, Backups und Betriebsfähigkeit
 
 ## 1. Monitoring mit Prometheus & Grafana
 
@@ -192,8 +184,6 @@ Das heutige Arbeiten hat gezeigt, wie wichtig klare Modultrennung, Logging und s
 - Infrastruktur als Code (Terraform) ermöglicht das Setup und Restore auf Knopfdruck – wichtig für Wartbarkeit und Kostenkontrolle in der Cloud.
 
 ---
-
-# Woche 6 + 7 – Betrieb und Abschluss
 
 ## 1. Gesamtüberblick & Automatisierung
 
@@ -266,9 +256,3 @@ Das heutige Arbeiten hat gezeigt, wie wichtig klare Modultrennung, Logging und s
 * Feedback-Schleifen (Fehleranalyse im Betrieb, User-Tests im Frontend) sind für die Stabilität und Akzeptanz mindestens so wichtig wie die technische Umsetzung
 
 ---
-
-## Fazit
-
-- Cloud- und Container-Technologien ermöglichen hochverfügbare, günstige und portable Web-Projekte, auch ohne grossen Aufwand für klassische DB-Backups
-- Die systematische Dokumentation, Tests und Automatisierung sorgen für maximale Resilienz
-- Monitoring und regelmässige Backups sind unverzichtbar für den Betrieb produktiver Systeme

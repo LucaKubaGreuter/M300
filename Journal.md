@@ -296,6 +296,8 @@ Das heutige Arbeiten hat gezeigt, wie wichtig klare Modultrennung, Logging und s
   * Nutzer können die Stadt im Frontend wählen, der Wert bleibt dank Cookies gespeichert
   * Das Frontend sieht modern und übersichtlich aus, Styling ist konsistent und vorbereitet für weitere Visuals (z.B. Wetter-Icons)
   * App ist resilient gegen VM-Restarts, da alles dokumentiert und als Code/Config vorhanden ist
+ 
+![Kostenanalyse](pictures/M300Kosten.png)
 
 ---
 

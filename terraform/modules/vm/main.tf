@@ -15,7 +15,7 @@ resource "azurerm_network_interface" "nic" {
 
 resource "azurerm_virtual_network" "vnet" {
   name                = "${var.vm_name}-vnet"
-  address_space       = ["10.0.0.0/16"]
+  address_space       = ["10.0.0.0/23"]
   location            = var.location
   resource_group_name = var.resource_group_name
   tags                = var.tags
